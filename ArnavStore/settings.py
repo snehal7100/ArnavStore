@@ -34,7 +34,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Login',
+    'ArnavStore.Admin',
+    'ArnavStore.Brand',
+    'ArnavStore.category',
+    'ArnavStore.Taxes',
+    'ArnavStore.Product',
+    'ArnavStore.Customer',
+    'ArnavStore.Supplier',
+    'ArnavStore.Pos',
+    'ArnavStore.Employee',
+    'ArnavStore.Reward',
+    'ArnavStore.payment',
+    'ArnavStore.posmaster',
+    'ArnavStore.poschild',
+    
+
 ]
+
 
 
 MIDDLEWARE = [
@@ -114,9 +131,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+# MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_URL = "/media/"
+
+
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Admin login credentials for simple auth in `Billpos/loginvalid.py`
+# Change these to update the login email and password.
+ADMIN_LOGIN_EMAIL = os.getenv("ADMIN_LOGIN_EMAIL", "admin@gmail.com")
+ADMIN_LOGIN_PASSWORD = os.getenv("ADMIN_LOGIN_PASSWORD", "1234")
+
