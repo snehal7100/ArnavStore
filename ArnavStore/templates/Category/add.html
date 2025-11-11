@@ -1,0 +1,104 @@
+ {% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Brand Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<script>
+  function validateForm() {
+    var c_name = document.getElementById("c_name").value.trim();
+    var c_img = document.getElementById("c_img").files.length; 
+    var B_img = document.getElementById("B_img").files.length; 
+
+    
+    if (c_name === "") {
+        alert("Category Name is required.");
+        return false;
+    }
+
+    
+    
+    var existingCategoryNames = ['ExistingCategory1', 'ExistingCategory2']; 
+    if (existingCategoryNames.includes(c_name)) {
+        alert("Duplicate entry not allowed! Category name already exists.");
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
+<body>
+    <div class="content-wrapper">
+        <div class="container mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header d-flex align-items-center">
+                    <h1 class="card-title">Category Form</h1>
+                    <a href="/category-list/" class="btn btn-primary a">View</a>
+                    </div>
+                    <style>
+                       .content-wrapper {
+                            margin-top: 30px; 
+                        }
+                        .a {
+                            font-weight: bold;
+                            font-size: 12px;
+                            height: 40px;
+                            width: 100px;
+                            margin-top: 10px;
+                            margin-right: 20px;
+                        }
+
+                        .card-header .btn {
+                        margin-left: auto; 
+                        
+                    </style>
+                   
+                    <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3 mt-3">
+                            <label for="name" class="star">category Name:</label>
+                            <input type="text" class="form-control" id="c_name" placeholder="Enter name" name="c_name">
+                        </div>
+                       
+
+                        <div class="mb-3 mt-3">
+                            <label for="name">category image:</label>
+                            <input type="file" class="form-control" id="c_img" placeholder="Enter name" name="c_img">
+                        </div>
+                        <div class="mb-3 mt-3">
+                          <label for="name">Banner image:</label>
+                          <input type="file" class="form-control" id="B_img" placeholder="Enter name" name="B_img">
+                      </div>
+
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>
+
+
+{% include "Component/footer.html" %}
+
+{% include "Component/Footer.html" %} 
+
