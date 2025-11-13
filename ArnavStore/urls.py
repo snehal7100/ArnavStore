@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from ArnavStore import views, categoryview, brandview, productview, Taxview, loginvalid, customerview, Dashboardview, supplierview, posview, employee, Paymentview, rewardsview, barcodeview, posmasterview, poschildview, billlistview
+from ArnavStore import views, categoryview, brandview, productview, Taxview, loginvalid, customerview, Dashboardview, supplierview, posview, Paymentview, barcodeview, posmasterview, poschildview, billlistview
 from ArnavStore import settings  
 from django.conf.urls.static import static  
 
@@ -54,16 +54,16 @@ urlpatterns = [
     path('supplier-delete/<id>/', supplierview.deleteSupplier),
     path('supplier-add/', supplierview.AddSupplier),
 
-    path('Employee-list/', employee.emp),
-    path('Employee-view/<id>/', employee.employeeview),
-    path('Employee-edit/<id>/', employee.editemployee),
-    path('Employee-delete/<id>/', employee.deleteemployee),
-    path('Employee-add/', employee.Addemployee),
+    # path('Employee-list/', employee.emp),
+    # path('Employee-view/<id>/', employee.employeeview),
+    # path('Employee-edit/<id>/', employee.editemployee),
+    # path('Employee-delete/<id>/', employee.deleteemployee),
+    # path('Employee-add/', employee.Addemployee),
 
-    path('rewards-list/', rewardsview.Rewards),
-    path('rewards-add/', rewardsview.AddRewards),
-    path('rewards-edit/<id>/', rewardsview.editRewards),
-    path('rewards-delete/<id>', rewardsview.delete),
+    # path('rewards-list/', rewardsview.Rewards),
+    # path('rewards-add/', rewardsview.AddRewards),
+    # path('rewards-edit/<id>/', rewardsview.editRewards),
+    # path('rewards-delete/<id>', rewardsview.delete),
 
     path('Payment-list/', Paymentview.payments),
     path('Payment-edit/<id>', Paymentview.editpayment),

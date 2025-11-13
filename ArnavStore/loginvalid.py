@@ -3,7 +3,10 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 
 def login_view(request):
-    list(messages.get_messages(request))
+    
+    storage = messages.get_messages(request)
+    for _ in storage:
+        pass
 
     if request.method == "POST":
         username = request.POST.get('uname')
@@ -18,7 +21,7 @@ def login_view(request):
             password == getattr(settings, "ADMIN_LOGIN_PASSWORD", "admin")
         ):
             messages.success(request, "Welcome back, Admin!")
-            return redirect('/index/')  
+            return redirect('/index/')
         else:
             messages.error(request, "Invalid email or password.")
             return render(request, 'Component/index.html')
