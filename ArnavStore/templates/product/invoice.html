@@ -1,0 +1,153 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice - {{ bill.id }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            padding: 20px;
+            width: 700px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .invoice-details, .customer-details {
+            width: 100%;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .invoice-details td, .customer-details td {
+            padding: 5px;
+        }
+
+        table.product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table.product-table th, table.product-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .total-section {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .total-section h3 {
+            margin: 5px 0;
+        }
+
+        .print-btn {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .print-btn button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            body { margin: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PRINT BUTTON -->
+    <div class="print-btn">
+        <button onclick="window.print()">🖨 Print Invoice</button>
+    </div>
+
+    <!-- SHOP HEADER -->
+    <div class="header">
+        <h2>{{ shop_name|default:"Arnav Store" }}</h2>
+        <p>{{ shop_address|default:"Shop No. 1, India" }}</p>
+        <p>Phone: {{ shop_phone|default:"9876543210" }}</p>
+    </div>
+
+    <!-- INVOICE + CUSTOMER DETAILS -->
+    <table class="invoice-details">
+        <tr>
+            <td><strong>Invoice No:</strong> {{ bill.id }}</td>
+            <td><strong>Date:</strong> {{ bill.bill_date }}</td>
+        </tr>
+    </table>
+
+    <table class="customer-details">
+        <tr>
+            <td><strong>Customer:</strong> {{ bill.customer_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Mobile:</strong> {{ bill.mobile_no }}</td>
+        </tr>
+        <tr>
+            <td><strong>Address:</strong> {{ bill.address }}</td>
+        </tr>
+        <tr>
+            <td><strong>Payment Term:</strong> {{ bill.payment_term }}</td>
+        </tr>
+    </table>
+
+    <!-- PRODUCT TABLE -->
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Item Name</th>
+                <th>Qty</th>
+                <th>MRP</th>
+                <th>Sale Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ p.item_name }}</td>
+                <td>{{ p.qty }}</td>
+                <td>₹{{ p.mrp }}</td>
+                <td>₹{{ p.sale_price }}</td>
+                <td>₹{{ p.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- TOTAL SECTION -->
+    <div class="total-section">
+        <h3>Grand Total: ₹{{ bill.total }}</h3>
+    </div>
+
+</body>
+</html>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% include "Component/footer.html" %}
